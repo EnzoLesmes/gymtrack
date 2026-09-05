@@ -91,3 +91,25 @@ def add_exercise_to_routine(routine_id: int, exercise_name: str) -> int:
 			return exercise_id
 	finally:
 		connection.close()
+
+
+def list_routines() -> list[sqlite3.Row]:
+	connection = get_connection()
+
+	try:
+		return connection.execute(
+			"SELECT id, name FROM routine ORDER BY id"
+		).fetchall()
+	finally:
+		connection.close()
+
+
+def list_exercises() -> list[sqlite3.Row]:
+	connection = get_connection()
+
+	try:
+		return connection.execute(
+			"SELECT id, name FROM exercise ORDER BY id"
+		).fetchall()
+	finally:
+		connection.close()
